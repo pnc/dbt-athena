@@ -42,6 +42,10 @@
     {% do adapter.delete_from_s3(location) %}
   {%- endif -%}
 
+  {%- if temporary -%}
+    {%- do drop_relation(relation) -%}
+  {%- endif -%}
+
   {%- if language == 'python' -%}
     {%- set spark_ctas = '' -%}
     {%- if table_type == 'iceberg' -%}
